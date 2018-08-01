@@ -22,7 +22,7 @@ import defaultSelectorFactory from './selectorFactory'
   it receives new props or store state.
  */
 
-function match(arg, factories, name) {
+function match(arg, factories) {
   for (let i = factories.length - 1; i >= 0; i--) {
     const result = factories[i](arg)
     if (result) return result
@@ -57,9 +57,9 @@ export function createConnect({
       ...extraOptions
     } = {}
   ) {
-    const initMapStateToProps = match(mapStateToProps, mapStateToPropsFactories, 'mapStateToProps')
-    const initMapDispatchToProps = match(mapDispatchToProps, mapDispatchToPropsFactories, 'mapDispatchToProps')
-    const initMergeProps = match(mergeProps, mergePropsFactories, 'mergeProps')
+    const initMapStateToProps = match(mapStateToProps, mapStateToPropsFactories)
+    const initMapDispatchToProps = match(mapDispatchToProps, mapDispatchToPropsFactories)
+    const initMergeProps = match(mergeProps, mergePropsFactories)
 
     return connectHOC(selectorFactory, {
       // used in error messages
